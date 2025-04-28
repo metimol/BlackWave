@@ -1,9 +1,9 @@
-Proprietary License for VisionCraft API
+Proprietary License for BlackWave API
 
-This software and associated documentation files (the "Software") are the proprietary information of VisionCraft ("Licensor"). All rights reserved.
+This software and associated documentation files (the "Software") are the proprietary information of BlackWave ("Licensor"). All rights reserved.
 
 1. Grant of License:
-The Licensor grants you ("Licensee") a limited, non-exclusive, non-transferable license to use the VisionCraft API (the "Software") solely for your personal or internal business operations in accordance with the terms and conditions outlined in this License. The VisionCraft API provides access to thousands of models, including but not limited to Stable Diffusion, LLM (Large Language Models), Text2GIF, and other AI-based models. Any other use, including but not limited to copying, modification, distribution, or reverse engineering of the Software, is strictly prohibited without the prior written consent of the Licensor.
+The Licensor grants you ("Licensee") a limited, non-exclusive, non-transferable license to use the BlackWave API (the "Software") solely for your personal or internal business operations in accordance with the terms and conditions outlined in this License. The BlackWave API provides access to thousands of models, including but not limited to Stable Diffusion, LLM (Large Language Models), Text2GIF, and other AI-based models. Any other use, including but not limited to copying, modification, distribution, or reverse engineering of the Software, is strictly prohibited without the prior written consent of the Licensor.
 
 2. Restrictions:
 - You shall not copy, modify, distribute, or create derivative works based on the Software.
@@ -11,7 +11,7 @@ The Licensor grants you ("Licensee") a limited, non-exclusive, non-transferable 
 - You shall not sublicense, sell, lease, or rent the Software.
 
 3. Fees and Payment:
-The VisionCraft API offers paid subscription plans. All fees for paid plans are non-refundable. By subscribing to a paid plan, you acknowledge and agree that all payments are final and no refunds will be issued under any circumstances.
+The BlackWave API offers paid subscription plans. All fees for paid plans are non-refundable. By subscribing to a paid plan, you acknowledge and agree that all payments are final and no refunds will be issued under any circumstances.
 
 4. Intellectual Property:
 You are not granted any rights or licenses in respect of any intellectual property rights, including patents, copyrights, trademarks, or trade secrets, except as expressly provided in this License. All rights, title, and interest in and to the Software remain with the Licensor.
@@ -25,6 +25,6 @@ In no event shall the Licensor be liable for any special, incidental, indirect, 
 7. Termination:
 This License is effective until terminated. Your rights under this License will terminate automatically without notice from the Licensor if you fail to comply with any term(s) of this License. Upon termination, you shall cease all use of the Software and destroy all copies, full or partial, of the Software.
 
-By using the VisionCraft API, you agree to be bound by the terms and conditions of this License. If you do not agree to these terms and conditions, you are not authorized to use the Software.
+By using the BlackWave API, you agree to be bound by the terms and conditions of this License. If you do not agree to these terms and conditions, you are not authorized to use the Software.
 
-VisionCraft
+BlackWave
