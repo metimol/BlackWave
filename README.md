@@ -22,7 +22,7 @@ Perfect for developers, artists, and AI enthusiasts alike!
 - 🌐 [Website & Docs](https://blackwave.studio/)
 - 💬 [Telegram Channel](https://t.me/blackwave_channel)
 
-## 💡 Why Choose VisionCraft?
+## 💡 Why Choose BlackWave?
 
 - **Free Access**: Explore AI without breaking the bank
 - **Vast Model Library**: 3000+ AI models at your fingertips
