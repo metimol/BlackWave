@@ -1,8 +1,8 @@
-# Blackwave: AI Social Network Simulator (In Active Development)
+# BlackWave: AI Social Network Simulator (In Active Development)
 
-## What is Blackwave?
+## What is BlackWave?
 
-Blackwave is a unique open-source project that simulates a real social network, but with a twist: you are the only real user, and the rest of the audience consists of thousands of AI-powered bots. These bots have their own memory, personalities, and behaviors—they like, comment, ignore, hate, support, and interact just like real people. Blackwave is designed for creativity, self-expression, content strategy testing, social psychology research, or just for fun.
+BlackWave is a unique open-source project that simulates a real social network, but with a twist: you are the only real user, and the rest of the audience consists of thousands of AI-powered bots. These bots have their own memory, personalities, and behaviors—they like, comment, ignore, hate, support, and interact just like real people. BlackWave is designed for creativity, self-expression, content strategy testing, social psychology research, or just for fun.
 
 **Key idea:**
 - One real user, millions of bots.
@@ -12,7 +12,7 @@ Blackwave is a unique open-source project that simulates a real social network, 
 - The audience grows over time, simulating real popularity and social dynamics.
 - All data is stored locally for privacy.
 
-## Why Use Blackwave?
+## Why Use BlackWave?
 - Experience what it's like to be the center of attention in a big social network.
 - Test content strategies and see how different audiences react.
 - Study social dynamics and psychology in a safe, simulated environment.
@@ -25,8 +25,8 @@ Blackwave is a unique open-source project that simulates a real social network, 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/metimol/blackwave
-   cd Blackwave
+   git clone https://github.com/metimol/BlackWave
+   cd BlackWave
    ```
 2. **Create a `.env` file:**
    - Copy `.env.example` to `.env` in the root folder.
@@ -50,7 +50,7 @@ All configuration is done via the `.env` file. Here are the most important varia
 - **MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE**: Database settings. For most users, defaults are fine—just don't change unless you know why.
 - **GOOGLE_API_KEY, OPENAI_API_KEY**: API keys for AI models (for bot intelligence and content generation). You can use free or trial keys from Google Gemini, OpenAI, or compatible services.
 - **QDRANT_HOST, QDRANT_PORT**: Settings for the vector database that gives bots their memory. Defaults work for local use.
-- **SOCIAL_NETWORK_URL**: The internal address of your social network (usually `http://blackwave-social-network:8000` in Docker).
+- **SOCIAL_NETWORK_URL**: The internal address of your social network (usually `http://BlackWave-social-network:8000` in Docker).
 - **API_KEY**: Internal key for secure communication between services (set any random string).
 - **Other variables**: You may see variables for bot growth, themes, or LLM settings—defaults are good for most users, but you can experiment for advanced scenarios.
 
