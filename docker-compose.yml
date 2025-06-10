@@ -1,0 +1,112 @@
+version: '3.8'
+
+services:
+  cartouche-social-network:
+    build:
+      context: ./social-network
+      dockerfile: Dockerfile
+    container_name: cartouche-social-network
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - cartouche-network
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - DOMAIN=${DOMAIN}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_PORT=${MYSQL_PORT}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
+  cartouche-bot-service:
+    build:
+      context: ./bot-system
+      dockerfile: Dockerfile
+    container_name: cartouche-bot-service
+    volumes:
+      - cartouche_data:/app/data
+    env_file:
+      - .env
+    environment:
+      - API_BASE_URL=${API_BASE_URL}
+      - API_TOKEN=${API_TOKEN}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GOOGLE_MODEL=${GOOGLE_MODEL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_API_BASE=${OPENAI_API_BASE}
+      - OPENAI_MODEL=${OPENAI_MODEL}
+      - DEFAULT_LLM_PROVIDER=${DEFAULT_LLM_PROVIDER}
+      - TEMPERATURE=${TEMPERATURE}
+      - MAX_TOKENS=${MAX_TOKENS}
+      - DB_PATH=${DB_PATH}
+      - QDRANT_HOST=${QDRANT_HOST}
+      - QDRANT_PORT=${QDRANT_PORT}
+      - SOCIAL_NETWORK_URL=${SOCIAL_NETWORK_URL}
+      - API_KEY=${API_KEY}
+      - INITIAL_BOTS_COUNT=${INITIAL_BOTS_COUNT}
+      - DAILY_BOTS_GROWTH_MIN=${DAILY_BOTS_GROWTH_MIN}
+      - DAILY_BOTS_GROWTH_MAX=${DAILY_BOTS_GROWTH_MAX}
+      - MAX_BOTS_COUNT=${MAX_BOTS_COUNT}
+      - MAX_COMMENTS_PER_POST=${MAX_COMMENTS_PER_POST}
+      - SOCIAL_NETWORK_THEMES=${SOCIAL_NETWORK_THEMES}
+      - MAIN_THEME_FOCUS=${MAIN_THEME_FOCUS}
+      - THEME_DIVERSITY_LEVEL=${THEME_DIVERSITY_LEVEL}
+      - REACTION_DELAY_MIN=${REACTION_DELAY_MIN}
+      - REACTION_DELAY_MAX=${REACTION_DELAY_MAX}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - LOG_FILE=${LOG_FILE}
+    depends_on:
+      - qdrant
+    networks:
+      - cartouche-network
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:v1.14.1
+    container_name: cartouche-qdrant
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    ports:
+      - "6333:6333"
+    networks:
+      - cartouche-network
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: cartouche-mysql
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - cartouche-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  qdrant_storage:
+    driver: local
+  cartouche_data:
+    driver: local
+  mysql_data:
+    driver: local
+
+networks:
+  cartouche-network:
+    driver: bridge

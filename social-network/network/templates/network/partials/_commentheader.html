@@ -1,0 +1,30 @@
+{% load static %}
+
+<div class="comment-header">
+    <a href="{% url 'network:profile' comment.user %}">
+        <img class="rounded-circle" src="{{ comment.user.profile.image }}" alt="@{{ comment.user }}">
+    </a>
+    <div>
+        <a class="d-flex gap-2" href="{% url 'network:profile' comment.user %}">
+            <strong class="text-primary-emphasis">@{{ comment.user }}</strong>
+        </a>
+        <small>{{ comment.date | date:"g:i A - M d, Y" }}</small>
+    </div>
+    {% if user == comment.user %}
+    <div class="ms-auto dropstart">
+        <button type="button" class="btn btn-sm" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></button>
+        <ul class="dropdown-menu">
+            <li>
+                <button type="button" data-commentid="{{ comment.pk }}" class="edit-comment dropdown-item btn btn-sm">
+                    <i class="far fa-edit"></i> Edit Comment
+                </button>
+            </li>
+            <li>
+                <button type="button" data-commentid="{{ comment.pk }}" class="delete-comment dropdown-item btn btn-sm">
+                    <i class="far fa-trash-alt"></i> Delete Comment
+                </button>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+</div>

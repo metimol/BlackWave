@@ -1,0 +1,408 @@
+/* Color Variables */
+:root {
+    --accent-main: #21BB9F;
+    --accent-light: #64cfbc;
+    --accent-dark: #14705f;
+    
+    --like: #FB2576;
+    --comment: #FFAB31;
+    --bookmark: #0071F2;
+    --edit: #64BC26;
+    --delete: #FF0303;
+    --pin: #8B008B;
+}
+
+/* Theme Colors */
+body[data-bs-theme="light"] {
+    --primary-clr: #FFF;
+    --secondary-clr: #FAFAFF;
+}
+
+body[data-bs-theme="dark"] {
+    --primary-clr: #111;
+    --secondary-clr: #232323;
+}
+
+/* Base Styles */
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+body > .row {
+    height: auto;
+    min-height: 100vh;
+}
+
+/* Utility Classes */
+.text-accent {
+    color: var(--accent-main);
+}
+
+.text-accent-light {
+    color: var(--accent-light);
+}
+
+.text-accent-dark {
+    color: var(--accent-dark);
+}
+
+.bg-primary-clr {
+    color: var(--text-main);
+    background-color: var(--primary-clr);
+}
+
+.bg-secondary-clr {
+    color: var(--text-main);
+    background-color: var(--secondary-clr);
+}
+
+/* Button Styles */
+.btn-accent {
+    color: var(--primary-clr);
+    background-color: var(--accent-main);
+}
+
+.btn-accent:hover {
+    color: var(--primary-clr);
+    background-color: var(--accent-light);
+}
+
+.btn-outline-accent {
+    color: var(--accent-main);
+    border: 1px solid var(--accent-main);
+}
+
+.btn-outline-accent:hover {
+    color: var(--primary-clr);
+    background-color: var(--accent-light);
+}
+
+/* Action Button Colors */
+.like i {
+    color: var(--like);
+}
+
+.comment i {
+    color: var(--comment);
+}
+
+.bookmark i {
+    color: var(--bookmark);
+}
+
+.edit i {
+    color: var(--edit);
+}
+
+.edit-comment i {
+    color: var(--edit);
+}
+
+.delete i {
+    color: var(--delete);
+}
+
+.delete-comment i {
+    color: var(--delete);
+}
+
+.pin i {
+    color: var(--pin);
+}
+
+/* Navigation */
+.nav-item.active {
+    color: var(--accent-main);
+}
+
+/* Profile Images */
+.profile-img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+/* Connections */
+.connection {
+    height: 100px;
+}
+
+.connection > img {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.connection span {
+    color: var(--accent-main);
+}
+
+/* Posts */
+.post-pinned {
+    font-size: 0.8rem;
+    padding-left: 0.5rem;
+}
+
+.post-header,
+.comment-header {
+    height: 50px;
+    display: flex;
+    gap: 1rem;
+}
+
+.post-header img,
+.comment-header img {
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-actions i {
+    width: 1.25rem;
+}
+
+.post-content {
+    display: block;
+}
+
+.post-edit-form {
+    display: none;
+}
+
+.post-actions > button.btn:not(:last-child) {
+    border-right: 1px solid #e9ecef;
+}
+
+/* Form Elements */
+textarea,
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.post-edit-form textarea,
+textarea[placeholder*="What's on your mind?"],
+textarea[name="content"] {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    white-space: pre-wrap !important;
+    overflow-wrap: break-word !important;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* New Post Form Styles */
+.border-accent {
+    border-color: var(--accent-main) !important;
+}
+
+.border-accent:focus {
+    border-color: var(--accent-light) !important;
+    box-shadow: 0 0 0 0.25rem rgba(33, 187, 159, 0.25) !important;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 0.35em;
+    height: 0.25em;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--text-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-light);
+}
+
+@supports (scrollbar-color: var(--text-dark) var(--accent-light)) {
+    * {
+        scrollbar-color: var(--accent-light) var(--text-dark);
+    }
+}
+
+/* Beautiful post submit button for all screens */
+.btn-accent.w-100 {
+    height: 48px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(33, 187, 159, 0.08);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+.btn-accent.w-100:hover, .btn-accent.w-100:focus {
+    background: var(--accent-light);
+    box-shadow: 0 4px 16px rgba(33, 187, 159, 0.16);
+    transform: translateY(-2px) scale(1.03);
+}
+
+/* Post creation form in aside (desktop) — alignment and spacing */
+@media (min-width: 992px) {
+    aside.col-lg-3 form {
+        margin-top: 32px;
+        margin-bottom: 0;
+        padding: 24px 16px 16px 16px;
+        background: var(--primary-clr);
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    aside.col-lg-3 .form-floating {
+        margin-bottom: 0;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 767.98px) {
+    /* Mobile Navigation */
+    nav.bg-primary-clr.sticky-top.d-flex.d-md-none {
+        height: 64px !important;
+        min-height: 64px !important;
+        max-height: 64px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        box-sizing: border-box;
+    }
+
+    nav.bg-primary-clr.sticky-top.d-flex.d-md-none h2,
+    nav.bg-primary-clr.sticky-top.d-flex.d-md-none .ms-auto,
+    nav.bg-primary-clr.sticky-top.d-flex.d-md-none .dropdown {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    nav.bg-primary-clr.sticky-top.d-flex.d-md-none img {
+        height: 32px !important;
+        max-height: 32px !important;
+        width: auto;
+        object-fit: cover;
+    }
+
+    nav.bg-primary-clr.sticky-top.d-flex.d-md-none .profile-img {
+        height: 32px !important;
+        width: 32px !important;
+        object-fit: cover;
+    }
+
+    /* Mobile Content Spacing */
+    body > .row {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    main.col-12 {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    main > * {
+        margin-top: 0 !important;
+    }
+
+    main > *:first-child {
+        padding-top: 8px !important;
+    }
+
+    section.p-3, 
+    section.p-4, 
+    section.container, 
+    section {
+        padding-top: 8px !important;
+    }
+
+    h1.text-primary-emphasis {
+        margin-top: 0 !important;
+    }
+
+    .container,
+    .container-fluid {
+        padding-top: 0 !important;
+    }
+
+    /* Mobile Content Elements */
+    .post,
+    .card,
+    .list-group-item {
+        margin-top: 8px !important;
+    }
+
+    .post:first-child,
+    .card:first-child,
+    .list-group-item:first-child {
+        margin-top: 0 !important;
+    }
+
+    body > .row {
+        height: auto !important;
+        min-height: 0 !important;
+    }
+    main.col-12 {
+        min-height: unset !important;
+    }
+    main {
+        display: block !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+    }
+}
+
+@media (min-width: 992px) {
+    nav.bg-primary-clr.col-lg-2 {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        min-height: 100vh;
+        align-self: flex-start;
+        z-index: 1020;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-right: 1px solid #222;
+    }
+    aside.col-lg-3 {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        min-height: 100vh;
+        align-self: flex-start;
+        z-index: 1020;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        border-left: 1px solid #222;
+    }
+    main.col-lg-7 {
+        height: 100vh;
+        overflow-y: auto;
+        padding-bottom: 2rem;
+    }
+    body > .row {
+        align-items: stretch;
+        min-height: 100vh;
+        height: 100vh;
+    }
+}
+
+body[data-bs-theme="light"],
+body[data-bs-theme="light"] .container-fluid,
+body[data-bs-theme="light"] .container,
+body[data-bs-theme="light"] .row {
+    background-color: var(--secondary-clr) !important;
+}
+
+body[data-bs-theme="dark"],
+body[data-bs-theme="dark"] .container-fluid,
+body[data-bs-theme="dark"] .container,
+body[data-bs-theme="dark"] .row {
+    background-color: var(--secondary-clr) !important;
+}
