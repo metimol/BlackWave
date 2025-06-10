@@ -1,5 +1,5 @@
 """
-Database session management for the Cartouche Bot Service.
+Database session management for the BlackWave Bot Service.
 Sets up SQLAlchemy connection and session handling.
 """
 

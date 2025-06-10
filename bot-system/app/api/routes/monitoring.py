@@ -1,5 +1,5 @@
 """
-Monitoring API routes for the Cartouche Bot Service.
+Monitoring API routes for the BlackWave Bot Service.
 """
 
 from fastapi import APIRouter, Depends, Query

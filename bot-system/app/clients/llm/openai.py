@@ -1,5 +1,5 @@
 """
-OpenAI LLM client for the Cartouche Bot Service.
+OpenAI LLM client for the BlackWave Bot Service.
 Implements the BaseLLMClient interface for OpenAI's API.
 """
 

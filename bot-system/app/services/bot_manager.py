@@ -1,5 +1,5 @@
 """
-Bot manager service for the Cartouche Bot Service.
+Bot manager service for the BlackWave Bot Service.
 Handles creation, management, and scheduling of bots.
 """
 

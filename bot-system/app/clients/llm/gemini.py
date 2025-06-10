@@ -1,5 +1,5 @@
 """
-Gemini LLM client for the Cartouche Bot Service.
+Gemini LLM client for the BlackWave Bot Service.
 Handles text generation using Google's Gemini API.
 """
 

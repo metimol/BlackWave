@@ -1,5 +1,5 @@
 """
-Main FastAPI application for the Cartouche Bot Service.
+Main FastAPI application for the BlackWave Bot Service.
 """
 
 from fastapi import FastAPI
@@ -24,8 +24,8 @@ logger = setup_logging()
 
 # Create FastAPI app
 app = FastAPI(
-    title="Cartouche Bot Service",
-    description="API for managing autonomous AI bots in the Cartouche social network simulator",
+    title="BlackWave Bot Service",
+    description="API for managing autonomous AI bots in the BlackWave social network simulator",
     version="1.1.0",
 )
 
@@ -51,7 +51,7 @@ app.include_router(router, prefix="/api")
 @app.on_event("startup")
 async def startup_event():
     """Initialize the application on startup."""
-    logger.info("Starting Cartouche Bot Service")
+    logger.info("Starting BlackWave Bot Service")
 
     # Create database tables
     Base.metadata.create_all(bind=engine)
@@ -66,7 +66,7 @@ async def startup_event():
 @app.on_event("shutdown")
 async def shutdown_event():
     """Clean up resources on shutdown."""
-    logger.info("Shutting down Cartouche Bot Service")
+    logger.info("Shutting down BlackWave Bot Service")
 
     # Stop scheduler
     await scheduler.stop()
@@ -237,4 +237,4 @@ async def sync_bots_with_external_api_task():
 @app.get("/")
 async def root():
     """Root endpoint."""
-    return {"message": "Welcome to Cartouche Bot Service"}
+    return {"message": "Welcome to BlackWave Bot Service"}

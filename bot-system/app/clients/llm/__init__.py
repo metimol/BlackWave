@@ -1,5 +1,5 @@
 """
-LLM factory for the Cartouche Bot Service.
+LLM factory for the BlackWave Bot Service.
 Creates and manages LLM clients based on configuration.
 """
 

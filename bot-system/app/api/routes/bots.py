@@ -1,5 +1,5 @@
 """
-Bot API routes for the Cartouche Bot Service.
+Bot API routes for the BlackWave Bot Service.
 """
 
 from fastapi import APIRouter, Depends, HTTPException, Query

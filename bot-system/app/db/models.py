@@ -1,5 +1,5 @@
 """
-SQLAlchemy models for the Cartouche Bot Service.
+SQLAlchemy models for the BlackWave Bot Service.
 Defines database tables and relationships.
 """
 

@@ -1,5 +1,5 @@
 """
-Pydantic models for the Cartouche Bot Service.
+Pydantic models for the BlackWave Bot Service.
 Defines data validation and serialization schemas.
 """
 

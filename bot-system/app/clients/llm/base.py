@@ -1,5 +1,5 @@
 """
-Base LLM client for the Cartouche Bot Service.
+Base LLM client for the BlackWave Bot Service.
 Defines the interface for all LLM providers.
 """
 

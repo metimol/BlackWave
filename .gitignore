@@ -89,7 +89,7 @@ test_results/
 ehthumbs.db
 Thumbs.db
 
-# Specific to Cartouche Bot Service
+# Specific to BlackWave Bot Service
 vector_store/
-cartouche.db
-cartouche_*.log
+blackwave.db
+blackwave_*.log

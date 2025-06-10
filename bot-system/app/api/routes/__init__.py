@@ -1,5 +1,5 @@
 """
-API routes initialization for the Cartouche Bot Service.
+API routes initialization for the BlackWave Bot Service.
 """
 
 from fastapi import APIRouter
