@@ -1,5 +1,5 @@
 """
-Avatar generator utility for the Cartouche Bot Service.
+Avatar generator utility for the Blackwave Bot Service.
 Handles generation of bot avatars.
 """
 

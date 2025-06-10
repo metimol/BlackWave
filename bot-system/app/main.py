@@ -14,7 +14,7 @@ from app.core.settings import MONITORING_INTERVAL
 
 from app.services.bot_manager import BotManager
 from app.services.content_generator import ContentGenerator
-from app.clients.cartouche_api import CartoucheAPIClient
+from app.clients.blackwave_api import BlackwaveAPIClient
 from app.db.repositories.bot_repository import BotRepository
 from app.db.repositories.activity_repository import ActivityRepository
 from app.services.memory_service import MemoryService
@@ -122,7 +122,7 @@ async def initialize_bots():
     try:
         # Create services
         content_generator = ContentGenerator()
-        api_client = CartoucheAPIClient()
+        api_client = BlackwaveAPIClient()
         bot_repository = BotRepository(db)
         activity_repository = ActivityRepository(db)
         memory_service = MemoryService()
@@ -153,7 +153,7 @@ async def daily_bot_growth():
     try:
         # Create services
         content_generator = ContentGenerator()
-        api_client = CartoucheAPIClient()
+        api_client = BlackwaveAPIClient()
         bot_repository = BotRepository(db)
         activity_repository = ActivityRepository(db)
         memory_service = MemoryService()
@@ -183,7 +183,7 @@ async def run_due_bot_activities():
     db = SessionLocal()
     try:
         content_generator = ContentGenerator()
-        api_client = CartoucheAPIClient()
+        api_client = BlackwaveAPIClient()
         bot_repository = BotRepository(db)
         activity_repository = ActivityRepository(db)
         memory_service = MemoryService()
@@ -212,7 +212,7 @@ async def sync_bots_with_external_api_task():
     db = SessionLocal()
     try:
         content_generator = ContentGenerator()
-        api_client = CartoucheAPIClient()
+        api_client = BlackwaveAPIClient()
         bot_repository = BotRepository(db)
         activity_repository = ActivityRepository(db)
         memory_service = MemoryService()

@@ -1,5 +1,5 @@
 """
-Logging configuration for the Cartouche Bot Service.
+Logging configuration for the Blackwave Bot Service.
 Sets up structured logging with loguru.
 """
 

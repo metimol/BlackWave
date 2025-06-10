@@ -1,5 +1,5 @@
 """
-Activity repository for the Cartouche Bot Service.
+Activity repository for the Blackwave Bot Service.
 Handles database operations for bot activities.
 """
 

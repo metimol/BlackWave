@@ -1,5 +1,5 @@
 """
-Core settings module for the Cartouche Bot Service.
+Core settings module for the Blackwave Bot Service.
 Loads configuration from environment variables.
 """
 
@@ -28,7 +28,7 @@ MAX_TOKENS = int(os.getenv("MAX_TOKENS", "1024"))
 
 
 # Database Configuration
-DB_PATH = os.getenv("DB_PATH", "data/cartouche.db")
+DB_PATH = os.getenv("DB_PATH", "data/blackwave.db")
 
 # Qdrant Configuration
 QDRANT_HOST = os.getenv("QDRANT_HOST", None)
@@ -60,7 +60,7 @@ REACTION_DELAY_MAX = float(os.getenv("REACTION_DELAY_MAX", "30"))
 
 # Logging Configuration
 LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG")
-LOG_FILE = os.getenv("LOG_FILE", "logs/cartouche.log")
+LOG_FILE = os.getenv("LOG_FILE", "logs/blackwave.log")
 
 # Bot categories and their base probabilities
 BOT_CATEGORIES = {

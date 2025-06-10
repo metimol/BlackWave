@@ -1,5 +1,5 @@
 """
-API client for the Cartouche C# REST API.
+API client for the Blackwave C# REST API.
 Handles communication with the main C# backend.
 """
 
@@ -17,8 +17,8 @@ from app.core.logging import setup_logging
 logger = setup_logging()
 
 
-class CartoucheAPIClient:
-    """Client for interacting with the Cartouche C# REST API."""
+class BlackwaveAPIClient:
+    """Client for interacting with the Blackwave C# REST API."""
 
     def __init__(self, base_url: str = SOCIAL_NETWORK_URL, token: str = API_KEY):
         """

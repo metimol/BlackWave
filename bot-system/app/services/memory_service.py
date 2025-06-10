@@ -1,5 +1,5 @@
 """
-Memory service for the Cartouche Bot Service.
+Memory service for the Blackwave Bot Service.
 Handles vector storage and retrieval of bot memories.
 """
 

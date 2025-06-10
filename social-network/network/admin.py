@@ -2,9 +2,9 @@ from django.contrib import admin
 from django.utils.html import format_html
 from .models import User, Profile, Post, Comment
 
-admin.site.index_title = "Welcome to the Cartouche Admin Panel"
-admin.site.site_header = "Cartouche Social Network Administration"
-admin.site.site_title = "Cartouche Admin"
+admin.site.index_title = "Welcome to the Blackwave Admin Panel"
+admin.site.site_header = "Blackwave Social Network Administration"
+admin.site.site_title = "Blackwave Admin"
 
 # --- Real Users ---
 class ProfileInline(admin.StackedInline):

@@ -11,7 +11,7 @@ from app.db.repositories.bot_repository import BotRepository
 from app.db.repositories.activity_repository import ActivityRepository
 from app.services.bot_manager import BotManager
 from app.services.content_generator import ContentGenerator
-from app.clients.cartouche_api import CartoucheAPIClient
+from app.clients.blackwave_api import BlackwaveAPIClient
 from app.services.memory_service import MemoryService
 from app.models.models import (
     BotResponse,
@@ -145,7 +145,7 @@ async def trigger_bot_reaction(bot_id: int, db: Session = Depends(get_db)):
     bot_repository = BotRepository(db)
     activity_repository = ActivityRepository(db)
     content_generator = ContentGenerator()
-    api_client = CartoucheAPIClient()
+    api_client = BlackwaveAPIClient()
     memory_service = MemoryService()
 
     bot = bot_repository.get_bot_by_id(bot_id)
@@ -175,7 +175,7 @@ async def create_bot_post(bot_id: int, db: Session = Depends(get_db)):
     bot_repository = BotRepository(db)
     activity_repository = ActivityRepository(db)
     content_generator = ContentGenerator()
-    api_client = CartoucheAPIClient()
+    api_client = BlackwaveAPIClient()
     memory_service = MemoryService()
 
     bot = bot_repository.get_bot_by_id(bot_id)

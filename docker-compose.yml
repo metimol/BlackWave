@@ -1,18 +1,18 @@
 version: '3.8'
 
 services:
-  cartouche-social-network:
+  blackwave-social-network:
     build:
       context: ./social-network
       dockerfile: Dockerfile
-    container_name: cartouche-social-network
+    container_name: blackwave-social-network
     ports:
       - "8000:8000"
     depends_on:
       mysql:
         condition: service_healthy
     networks:
-      - cartouche-network
+      - blackwave-network
     restart: unless-stopped
     env_file:
       - .env
@@ -24,13 +24,13 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
-  cartouche-bot-service:
+  blackwave-bot-service:
     build:
       context: ./bot-system
       dockerfile: Dockerfile
-    container_name: cartouche-bot-service
+    container_name: blackwave-bot-service
     volumes:
-      - cartouche_data:/app/data
+      - blackwave_data:/app/data
     env_file:
       - .env
     environment:
@@ -64,23 +64,23 @@ services:
     depends_on:
       - qdrant
     networks:
-      - cartouche-network
+      - blackwave-network
     restart: unless-stopped
 
-  qdrant:
+  blackwave-qdrant:
     image: qdrant/qdrant:v1.14.1
-    container_name: cartouche-qdrant
+    container_name: blackwave-qdrant
     volumes:
       - qdrant_storage:/qdrant/storage
     ports:
       - "6333:6333"
     networks:
-      - cartouche-network
+      - blackwave-network
     restart: unless-stopped
 
-  mysql:
+  blackwave-mysql:
     image: mysql:8.0
-    container_name: cartouche-mysql
+    container_name: blackwave-mysql
     restart: unless-stopped
     env_file:
       - .env
@@ -92,7 +92,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
-      - cartouche-network
+      - blackwave-network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 5s
@@ -102,11 +102,11 @@ services:
 volumes:
   qdrant_storage:
     driver: local
-  cartouche_data:
+  blackwave_data:
     driver: local
   mysql_data:
     driver: local
 
 networks:
-  cartouche-network:
+  blackwave-network:
     driver: bridge

@@ -1,9 +1,9 @@
 """
-Content generator service for the Cartouche Bot Service.
+Content generator service for the Blackwave Bot Service.
 Handles generation of bot content using LLM.
 """
 
-from typing import List
+from typing import List, Optional
 import datetime
 
 from app.clients.llm import LLMFactory
@@ -27,7 +27,7 @@ logger = setup_logging()
 class ContentGenerator:
     """Service for generating bot content."""
 
-    def __init__(self, llm_provider: str = None, api_key: str = None):
+    def __init__(self, llm_provider: Optional[str] = None, api_key: Optional[str] = None):
         """
         Initialize the content generator.
 
@@ -74,7 +74,7 @@ Write ONLY a short, authentic bio (1-3 sentences) that reflects your personality
             raise LLMError(f"Failed to generate bot description: {str(e)}")
 
     async def generate_comment(
-        self, bot_category: str, post_text: str, bot_memories: List[str] = None
+        self, bot_category: str, post_text: str, bot_memories: Optional[List[str]] = None
     ) -> str:
         """
         Generate a comment for a post.

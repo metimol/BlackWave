@@ -1,5 +1,5 @@
 """
-Bot repository for the Cartouche Bot Service.
+Bot repository for the Blackwave Bot Service.
 Handles database operations for bots.
 """
 
@@ -156,7 +156,7 @@ class BotRepository:
             if not bot:
                 raise DatabaseError(f"Bot with ID {bot_id} not found")
 
-            bot.last_active = datetime.utcnow()
+            bot.last_active = func.now()
             self.db.commit()
             self.db.refresh(bot)
             return bot

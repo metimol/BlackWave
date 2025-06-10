@@ -16,7 +16,7 @@ from app.db.repositories.activity_repository import ActivityRepository
 from app.services.content_generator import ContentGenerator
 from app.utils.avatar_generator import AvatarGenerator
 from app.utils.username_generator import UsernameGenerator
-from app.clients.cartouche_api import CartoucheAPIClient
+from app.clients.blackwave_api import BlackwaveAPIClient
 from app.core.settings import (
     BOT_CATEGORIES,
     INITIAL_BOTS_COUNT,
@@ -46,7 +46,7 @@ class BotManager:
         bot_repository: BotRepository,
         activity_repository: ActivityRepository,
         content_generator: ContentGenerator,
-        api_client: CartoucheAPIClient,
+        api_client: BlackwaveAPIClient,
         memory_service: MemoryService,
     ):
         """

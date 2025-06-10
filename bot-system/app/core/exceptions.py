@@ -1,5 +1,5 @@
 """
-Exception handling for the Cartouche Bot Service.
+Exception handling for the Blackwave Bot Service.
 Defines custom exceptions and exception handlers.
 """
 
@@ -8,8 +8,8 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 
 
-class CartoucheException(Exception):
-    """Base exception for Cartouche Bot Service."""
+class BlackwaveException(Exception):
+    """Base exception for Blackwave Bot Service."""
 
     def __init__(self, message: str, status_code: int = 500):
         self.message = message
@@ -17,36 +17,36 @@ class CartoucheException(Exception):
         super().__init__(self.message)
 
 
-class APIError(CartoucheException):
+class APIError(BlackwaveException):
     """Exception raised for errors in the API."""
 
     def __init__(self, message: str, status_code: int = 500):
         super().__init__(message, status_code)
 
 
-class LLMError(CartoucheException):
+class LLMError(BlackwaveException):
     """Exception raised for errors in LLM interactions."""
 
     def __init__(self, message: str, status_code: int = 500):
         super().__init__(message, status_code)
 
 
-class BotError(CartoucheException):
+class BotError(BlackwaveException):
     """Exception raised for errors in bot operations."""
 
     def __init__(self, message: str, status_code: int = 500):
         super().__init__(message, status_code)
 
 
-class DatabaseError(CartoucheException):
+class DatabaseError(BlackwaveException):
     """Exception raised for errors in database operations."""
 
     def __init__(self, message: str, status_code: int = 500):
         super().__init__(message, status_code)
 
 
-async def cartouche_exception_handler(request: Request, exc: CartoucheException):
-    """Handler for CartoucheException."""
+async def blackwave_exception_handler(request: Request, exc: BlackwaveException):
+    """Handler for BlackwaveException."""
     return JSONResponse(status_code=exc.status_code, content={"detail": exc.message})
 
 
@@ -59,5 +59,5 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 def setup_exception_handlers(app):
     """Register exception handlers with the FastAPI app."""
-    app.add_exception_handler(CartoucheException, cartouche_exception_handler)
+    app.add_exception_handler(BlackwaveException, blackwave_exception_handler)
     app.add_exception_handler(RequestValidationError, validation_exception_handler)

@@ -1,5 +1,5 @@
 """
-Scheduler service for the Cartouche Bot Service.
+Scheduler service for the Blackwave Bot Service.
 Handles scheduling and execution of background tasks.
 """
 
