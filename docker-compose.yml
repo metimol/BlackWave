@@ -67,7 +67,7 @@ services:
       - blackwave-network
     restart: unless-stopped
 
-  blackwave-qdrant:
+  qdrant:
     image: qdrant/qdrant:v1.14.1
     container_name: blackwave-qdrant
     volumes:
@@ -78,7 +78,7 @@ services:
       - blackwave-network
     restart: unless-stopped
 
-  blackwave-mysql:
+  mysql:
     image: mysql:8.0
     container_name: blackwave-mysql
     restart: unless-stopped
