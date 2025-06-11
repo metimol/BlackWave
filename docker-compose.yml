@@ -24,7 +24,7 @@ services:
       - ALLOWED_HOSTS=*
       - DJANGO_DEBUG=False
     volumes:
-      - ./social-network/staticfiles:/app/staticfiles
+      - static_files:/app/staticfiles
 
   blackwave-bot-service:
     build:
@@ -98,7 +98,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
-
   nginx:
     image: nginx:1.25
     container_name: blackwave-nginx
@@ -108,7 +107,7 @@ services:
       - "8000:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./social-network/staticfiles:/staticfiles:ro
+      - static_files:/staticfiles:ro
     networks:
       - blackwave-network
     restart: unless-stopped
@@ -119,6 +118,8 @@ volumes:
   blackwave_data:
     driver: local
   mysql_data:
+    driver: local
+  static_files:
     driver: local
 
 networks:
