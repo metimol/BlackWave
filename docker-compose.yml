@@ -17,7 +17,7 @@ services:
     environment:
       - DOMAIN=${DOMAIN}
       - DJANGO_SECRET_KEY=d1059e78-d525-4962-adcf-107f7d4bca4a
-      - API_TOKEN=af727f64-530a-404c-a238-9d4ef061b80d
+      - API_KEY=af727f64-530a-404c-a238-9d4ef061b80d
       - MYSQL_HOST=mysql
       - MYSQL_PORT=3306
       - MYSQL_DATABASE=blackwave_db
@@ -36,8 +36,8 @@ services:
     env_file:
       - .env
     environment:
-      - API_BASE_URL=http://blackwave-bot-service:8000
-      - API_TOKEN=af727f64-530a-404c-a238-9d4ef061b80d
+      - SOCIAL_NETWORK_URL=http://blackwave-social-network:8000
+      - API_KEY=af727f64-530a-404c-a238-9d4ef061b80d
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
       - GOOGLE_MODEL=${GOOGLE_MODEL}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
@@ -49,8 +49,6 @@ services:
       - DB_PATH=data/blackwave.db
       - QDRANT_HOST=qdrant
       - QDRANT_PORT=6333
-      - SOCIAL_NETWORK_URL=${SOCIAL_NETWORK_URL}
-      - API_KEY=${API_KEY}
       - INITIAL_BOTS_COUNT=${INITIAL_BOTS_COUNT}
       - DAILY_BOTS_GROWTH_MIN=${DAILY_BOTS_GROWTH_MIN}
       - DAILY_BOTS_GROWTH_MAX=${DAILY_BOTS_GROWTH_MAX}
