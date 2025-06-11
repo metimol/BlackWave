@@ -16,11 +16,15 @@ services:
       - .env
     environment:
       - DOMAIN=${DOMAIN}
-      - MYSQL_HOST=${MYSQL_HOST}
-      - MYSQL_PORT=${MYSQL_PORT}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - DJANGO_SECRET_KEY=d1059e78-d525-4962-adcf-107f7d4bca4a
+      - API_TOKEN=af727f64-530a-404c-a238-9d4ef061b80d
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=blackwave_db
+      - MYSQL_USER=blackwave
+      - MYSQL_PASSWORD=blackwave_password
+      - ALLOWED_HOSTS=*
+      - DJANGO_DEBUG=False
 
   blackwave-bot-service:
     build:
@@ -32,8 +36,8 @@ services:
     env_file:
       - .env
     environment:
-      - API_BASE_URL=${API_BASE_URL}
-      - API_TOKEN=${API_TOKEN}
+      - API_BASE_URL=http://blackwave-bot-service:8000
+      - API_TOKEN=af727f64-530a-404c-a238-9d4ef061b80d
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
       - GOOGLE_MODEL=${GOOGLE_MODEL}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
@@ -42,9 +46,9 @@ services:
       - DEFAULT_LLM_PROVIDER=${DEFAULT_LLM_PROVIDER}
       - TEMPERATURE=${TEMPERATURE}
       - MAX_TOKENS=${MAX_TOKENS}
-      - DB_PATH=${DB_PATH}
-      - QDRANT_HOST=${QDRANT_HOST}
-      - QDRANT_PORT=${QDRANT_PORT}
+      - DB_PATH=data/blackwave.db
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
       - SOCIAL_NETWORK_URL=${SOCIAL_NETWORK_URL}
       - API_KEY=${API_KEY}
       - INITIAL_BOTS_COUNT=${INITIAL_BOTS_COUNT}
@@ -57,8 +61,8 @@ services:
       - THEME_DIVERSITY_LEVEL=${THEME_DIVERSITY_LEVEL}
       - REACTION_DELAY_MIN=${REACTION_DELAY_MIN}
       - REACTION_DELAY_MAX=${REACTION_DELAY_MAX}
-      - LOG_LEVEL=${LOG_LEVEL}
-      - LOG_FILE=${LOG_FILE}
+      - LOG_LEVEL=INFO
+      - LOG_FILE=logs/blackwave.log
     depends_on:
       - qdrant
     networks:
@@ -83,10 +87,10 @@ services:
     env_file:
       - .env
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=blackwave_root_password
+      - MYSQL_DATABASE=blackwave_db
+      - MYSQL_USER=blackwave
+      - MYSQL_PASSWORD=blackwave_password
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
