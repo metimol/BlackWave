@@ -26,7 +26,7 @@ logger = setup_logging()
 app = FastAPI(
     title="BlackWave Bot Service",
     description="API for managing autonomous AI bots in the BlackWave social network simulator",
-    version="1.1.0",
+    version="1.0.2",
 )
 
 # Setup CORS

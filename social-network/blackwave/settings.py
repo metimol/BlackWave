@@ -122,7 +122,7 @@ SIMPLE_JWT = {
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Blackwave API",
-    "VERSION": "1.0.0",
+    "VERSION": "1.0.2",
     "SERVE_INCLUDE_SCHEMA": False,
     "SWAGGER_UI_SETTINGS": {
         "persistAuthorization": True,
