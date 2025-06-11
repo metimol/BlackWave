@@ -1,8 +1,6 @@
 services:
   blackwave-social-network:
-    build:
-      context: ./social-network
-      dockerfile: Dockerfile
+    image: ghcr.io/metimol/blackwave-social-network:v1.0.0
     container_name: blackwave-social-network
     depends_on:
       mysql:
@@ -27,9 +25,7 @@ services:
       - static_files:/app/staticfiles
 
   blackwave-bot-service:
-    build:
-      context: ./bot-system
-      dockerfile: Dockerfile
+    image: ghcr.io/metimol/blackwave-bot-service:v1.0.0
     container_name: blackwave-bot-service
     volumes:
       - blackwave_data:/app/data
