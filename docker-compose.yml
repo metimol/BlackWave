@@ -4,8 +4,6 @@ services:
       context: ./social-network
       dockerfile: Dockerfile
     container_name: blackwave-social-network
-    ports:
-      - "8000:8000"
     depends_on:
       mysql:
         condition: service_healthy
@@ -25,6 +23,8 @@ services:
       - MYSQL_PASSWORD=blackwave_password
       - ALLOWED_HOSTS=*
       - DJANGO_DEBUG=False
+    volumes:
+      - ./social-network/staticfiles:/app/staticfiles
 
   blackwave-bot-service:
     build:
@@ -98,6 +98,20 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
+  nginx:
+    image: nginx:1.25
+    container_name: blackwave-nginx
+    depends_on:
+      - blackwave-social-network
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./social-network/staticfiles:/staticfiles:ro
+    networks:
+      - blackwave-network
+    restart: unless-stopped
 
 volumes:
   qdrant_storage:
