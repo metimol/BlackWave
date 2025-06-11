@@ -25,7 +25,7 @@ services:
       - static_files:/app/staticfiles
 
   blackwave-bot-service:
-    image: ghcr.io/metimol/blackwave-bot-service:v1.0.2
+    image: ghcr.io/metimol/blackwave-bot-system:v1.0.2
     container_name: blackwave-bot-service
     volumes:
       - blackwave_data:/app/data
