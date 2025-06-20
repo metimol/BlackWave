@@ -6,6 +6,7 @@ Implements the BaseLLMClient interface for OpenAI's API.
 import openai
 
 from app.clients.llm.base import BaseLLMClient
+from app.clients.llm.strip_think import strip_think_tags
 from app.core.settings import OPENAI_API_KEY, OPENAI_API_BASE, OPENAI_MODEL
 from app.core.exceptions import LLMError
 
@@ -53,6 +54,7 @@ class OpenAIClient(BaseLLMClient):
                 max_tokens=max_tokens,
                 temperature=temperature,
             )
-            return response.choices[0].text.strip()
+            raw_text = response.choices[0].text.strip()
+            return strip_think_tags(raw_text)
         except Exception as e:
             raise LLMError(f"OpenAI text generation error: {str(e)}")

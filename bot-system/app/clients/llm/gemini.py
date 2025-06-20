@@ -8,6 +8,7 @@ from app.clients.llm.base import BaseLLMClient
 from app.core.exceptions import LLMError
 from app.core.logging import setup_logging
 from app.core.settings import GOOGLE_API_KEY, GOOGLE_MODEL
+from app.clients.llm.strip_think import strip_think_tags
 
 # Setup logging
 logger = setup_logging()
@@ -65,7 +66,7 @@ class GeminiClient(BaseLLMClient):
 
             # Extract and return text
             if response.text:
-                return response.text.strip()
+                return strip_think_tags(response.text.strip())
             else:
                 raise LLMError("Gemini returned empty response")
 

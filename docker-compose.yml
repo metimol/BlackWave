@@ -1,6 +1,6 @@
 services:
   blackwave-social-network:
-    image: ghcr.io/metimol/blackwave-social-network:v1.0.2
+    image: ghcr.io/metimol/blackwave-social-network:latest
     container_name: blackwave-social-network
     depends_on:
       mysql:
@@ -25,7 +25,7 @@ services:
       - static_files:/app/staticfiles
 
   blackwave-bot-service:
-    image: ghcr.io/metimol/blackwave-bot-system:v1.0.2
+    image: ghcr.io/metimol/blackwave-bot-system:latest
     container_name: blackwave-bot-service
     volumes:
       - blackwave_data:/app/data
