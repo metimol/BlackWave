@@ -97,7 +97,13 @@ BlackWave consists of two main services:
 
 ## Configuration
 
-All configuration is handled via the `.env` file in the project root. See `.env.example` for all available variables and their descriptions. Most users only need to set their LLM API keys (for Gemini or OpenAI) and optionally adjust bot or theme settings. Advanced variables and integrations are preconfigured for Docker Compose and do not require manual setup.
+All configuration is handled via the `.env` file in the project root. See `.env.example` for all available variables and their descriptions. Most users only need to set their LLM provider and credentials:
+
+- **For OpenAI:** Set `OPENAI_API_KEY` and `DEFAULT_LLM_PROVIDER=openai`
+- **For Gemini:** Set `GOOGLE_API_KEY` and `DEFAULT_LLM_PROVIDER=gemini`
+- **For Ollama:** Install Ollama locally, set `DEFAULT_LLM_PROVIDER=ollama`, and optionally configure `OLLAMA_BASE_URL` and `OLLAMA_MODEL`
+
+Advanced bot behavior, themes, and scheduling settings are preconfigured for Docker Compose and do not require manual setup.
 
 ---
 
@@ -105,7 +111,7 @@ All configuration is handled via the `.env` file in the project root. See `.env.
 
 ### Prerequisites
 - [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/)
-- (Optional) OpenAI or Gemini API keys for advanced bot intelligence
+- (Optional) OpenAI, Gemini API keys, or Ollama installation for advanced bot intelligence
 
 ### Steps
 ```powershell
