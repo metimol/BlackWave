@@ -101,7 +101,7 @@ All configuration is handled via the `.env` file in the project root. See `.env.
 
 - **For OpenAI:** Set `OPENAI_API_KEY` and `DEFAULT_LLM_PROVIDER=openai`
 - **For Gemini:** Set `GOOGLE_API_KEY` and `DEFAULT_LLM_PROVIDER=gemini`
-- **For Ollama:** Install Ollama locally, set `DEFAULT_LLM_PROVIDER=ollama`, and optionally configure `OLLAMA_BASE_URL` and `OLLAMA_MODEL`
+- **For Ollama:** Install Ollama locally, set `DEFAULT_LLM_PROVIDER=ollama`
 
 Advanced bot behavior, themes, and scheduling settings are preconfigured for Docker Compose and do not require manual setup.
 
