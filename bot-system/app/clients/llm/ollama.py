@@ -3,7 +3,7 @@ Ollama LLM client for the BlackWave Bot Service.
 Implements the BaseLLMClient interface for Ollama's API.
 """
 
-import httpx
+import aiohttp
 import json
 from typing import Optional
 
@@ -32,17 +32,24 @@ class OllamaClient(BaseLLMClient):
         """
         self.base_url = base_url.rstrip('/')
         self.model = model
-        self.timeout = timeout
-        self._client: Optional[httpx.AsyncClient] = None
+        self.timeout = aiohttp.ClientTimeout(total=timeout)
+        self._session: Optional[aiohttp.ClientSession] = None
 
-    async def _get_client(self) -> httpx.AsyncClient:
-        """Get or create HTTP client."""
-        if self._client is None or self._client.is_closed:
-            self._client = httpx.AsyncClient(
-                timeout=httpx.Timeout(self.timeout),
-                limits=httpx.Limits(max_connections=10, max_keepalive_connections=5)
+    async def _get_session(self) -> aiohttp.ClientSession:
+        """Get or create HTTP session."""
+        if self._session is None or self._session.closed:
+            connector = aiohttp.TCPConnector(
+                limit=10,
+                limit_per_host=5,
+                keepalive_timeout=30,
+                enable_cleanup_closed=True,
             )
-        return self._client
+            self._session = aiohttp.ClientSession(
+                connector=connector,
+                timeout=self.timeout,
+                headers={'Content-Type': 'application/json'}
+            )
+        return self._session
 
     async def generate_text(
         self, 
@@ -68,7 +75,7 @@ class OllamaClient(BaseLLMClient):
             raise LLMError("Empty prompt provided")
 
         try:
-            client = await self._get_client()
+            session = await self._get_session()
             url = f"{self.base_url}/api/generate"
             
             payload = {
@@ -81,33 +88,38 @@ class OllamaClient(BaseLLMClient):
                 },
             }
 
-            response = await client.post(url, json=payload)
-            response.raise_for_status()
+            async with session.post(url, json=payload) as response:
+                response.raise_for_status()
+                
+                try:
+                    result = await response.json()
+                except (json.JSONDecodeError, aiohttp.ContentTypeError) as e:
+                    text = await response.text()
+                    raise LLMError(f"Invalid JSON response from Ollama: {str(e)}. Response: {text[:200]}")
 
-            try:
-                result = response.json()
-            except json.JSONDecodeError as e:
-                raise LLMError(f"Invalid JSON response from Ollama: {str(e)}")
+                raw_text = result.get("response", "").strip()
 
-            raw_text = result.get("response", "").strip()
+                if not raw_text:
+                    raise LLMError("Ollama returned empty response")
 
-            if not raw_text:
-                raise LLMError("Ollama returned empty response")
+                return strip_think_tags(raw_text)
 
-            return strip_think_tags(raw_text)
-
-        except httpx.HTTPStatusError as e:
-            raise LLMError(f"Ollama API HTTP error: {e.response.status_code} - {e.response.text}")
-        except httpx.RequestError as e:
-            raise LLMError(f"Ollama API request error: {str(e)}")
+        except aiohttp.ClientResponseError as e:
+            raise LLMError(f"Ollama API HTTP error: {e.status} - {e.message}")
+        except aiohttp.ClientConnectionError as e:
+            raise LLMError(f"Ollama API connection error: {str(e)}")
+        except aiohttp.ClientError as e:
+            raise LLMError(f"Ollama API client error: {str(e)}")
+        except asyncio.TimeoutError:
+            raise LLMError("Ollama API request timed out")
         except Exception as e:
             raise LLMError(f"Ollama text generation error: {str(e)}")
 
     async def close(self):
-        """Close the HTTP client."""
-        if self._client and not self._client.is_closed:
-            await self._client.aclose()
-            self._client = None
+        """Close the HTTP session."""
+        if self._session and not self._session.closed:
+            await self._session.close()
+            self._session = None
 
     async def __aenter__(self):
         """Async context manager entry."""
