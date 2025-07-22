@@ -6,6 +6,7 @@ Creates and manages LLM clients based on configuration.
 from app.clients.llm.base import BaseLLMClient
 from app.clients.llm.gemini import GeminiClient
 from app.clients.llm.openai import OpenAIClient
+from app.clients.llm.ollama import OllamaClient
 from app.core.settings import DEFAULT_LLM_PROVIDER
 from app.core.exceptions import LLMError
 
@@ -38,5 +39,7 @@ class LLMFactory:
             return GeminiClient()
         elif provider == "openai":
             return OpenAIClient()
+        elif provider == "ollama":
+            return OllamaClient()
         else:
             raise LLMError(f"Unsupported LLM provider: {provider}")

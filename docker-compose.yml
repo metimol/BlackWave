@@ -39,6 +39,10 @@ services:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - OPENAI_API_BASE=${OPENAI_API_BASE}
       - OPENAI_MODEL=${OPENAI_MODEL}
+      - OLLAMA_API_KEY=${OLLAMA_API_KEY}
+      - OLLAMA_API_BASE=${OLLAMA_API_BASE}
+      - OLLAMA_MODEL=${OLLAMA_MODEL}
+      - OLLAMA_TIMEOUT=${OLLAMA_TIMEOUT}
       - DEFAULT_LLM_PROVIDER=${DEFAULT_LLM_PROVIDER}
       - TEMPERATURE=${TEMPERATURE}
       - MAX_TOKENS=${MAX_TOKENS}
@@ -94,6 +98,27 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
+  # Optional Ollama service for local LLM usage
+  # Uncomment this section if you want to run Ollama locally
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: blackwave-ollama
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   ports:
+  #     - "11434:11434"
+  #   networks:
+  #     - blackwave-network
+  #   restart: unless-stopped
+  #   # Uncomment the following lines if you have NVIDIA GPU support
+  #   # deploy:
+  #   #   resources:
+  #   #     reservations:
+  #   #       devices:
+  #   #         - driver: nvidia
+  #   #           count: 1
+  #   #           capabilities: [gpu]
   nginx:
     image: nginx:1.25
     container_name: blackwave-nginx
@@ -117,6 +142,9 @@ volumes:
     driver: local
   static_files:
     driver: local
+  # Uncomment this volume if you enable the Ollama service
+  # ollama_data:
+  #   driver: local
 
 networks:
   blackwave-network:

@@ -37,7 +37,7 @@
 
 ## Features
 - **AI-Powered Bots:** Each bot has a unique profile, memory, and personality (fan, hater, neutral, humorous, etc.)
-- **LLM Integration:** Supports OpenAI, Google Gemini, Ollama, OpenRouter, and more for bot intelligence
+- **LLM Integration:** Supports OpenAI, Google Gemini, Ollama (local and remote), OpenRouter, and more for bot intelligence
 - **Bot Memory:** Uses Qdrant vector database for persistent, context-aware bot memory
 - **Realistic Social Simulation:** Bots interact, comment, like, repost, and "learn" from your actions
 - **Audience Growth:** Simulates organic audience expansion and engagement
@@ -97,7 +97,69 @@ BlackWave consists of two main services:
 
 ## Configuration
 
-All configuration is handled via the `.env` file in the project root. See `.env.example` for all available variables and their descriptions. Most users only need to set their LLM API keys (for Gemini or OpenAI) and optionally adjust bot or theme settings. Advanced variables and integrations are preconfigured for Docker Compose and do not require manual setup.
+All configuration is handled via the `.env` file in the project root. See `.env.example` for all available variables and their descriptions. Most users only need to set their LLM API keys (for Gemini or OpenAI) or configure Ollama, and optionally adjust bot or theme settings. Advanced variables and integrations are preconfigured for Docker Compose and do not require manual setup.
+
+### LLM Provider Configuration
+
+BlackWave supports three main LLM providers:
+
+#### 1. Google Gemini (Default)
+```bash
+GOOGLE_API_KEY=your_gemini_api_key_here
+DEFAULT_LLM_PROVIDER=gemini
+```
+
+#### 2. OpenAI
+```bash
+OPENAI_API_KEY=your_openai_api_key_here
+DEFAULT_LLM_PROVIDER=openai
+```
+
+#### 3. Ollama (Local and Remote)
+Ollama offers the most flexibility with both local and remote deployment options:
+
+**Option A: Local Ollama (Recommended for Privacy)**
+1. Enable the Ollama service in `docker-compose.yml` by uncommenting the ollama section
+2. Configure your `.env`:
+   ```bash
+   DEFAULT_LLM_PROVIDER=ollama
+   OLLAMA_API_BASE=http://ollama:11434  # Use container name when running via Docker
+   OLLAMA_MODEL=llama3.2
+   # OLLAMA_API_KEY=  # Leave empty for local usage
+   ```
+3. Start the services: `docker-compose up --build`
+4. Pull your desired model: `docker exec blackwave-ollama ollama pull llama3.2`
+
+**Option B: External Ollama Instance**
+1. Install Ollama on your host or another server
+2. Configure your `.env`:
+   ```bash
+   DEFAULT_LLM_PROVIDER=ollama
+   OLLAMA_API_BASE=http://localhost:11434  # Or your server IP
+   OLLAMA_MODEL=llama3.2
+   # OLLAMA_API_KEY=  # Leave empty for local usage
+   ```
+
+**Option C: Remote Ollama with API Key**
+For remote Ollama instances that require authentication:
+```bash
+DEFAULT_LLM_PROVIDER=ollama
+OLLAMA_API_BASE=https://your-ollama-server.com
+OLLAMA_MODEL=llama3.2
+OLLAMA_API_KEY=your_api_key_here
+```
+
+**Popular Ollama Models:**
+- `llama3.2` - Balanced performance and quality
+- `llama3.2:70b` - High quality, requires more resources
+- `codellama` - Optimized for code-related tasks
+- `mistral` - Fast and efficient
+- `gemma2` - Google's open model
+
+**GPU Support:**
+If you have NVIDIA GPU support, uncomment the GPU configuration in the Ollama service section of `docker-compose.yml` for significantly faster inference.
+
+**📖 For detailed Ollama setup instructions, troubleshooting, and optimization tips, see [OLLAMA_SETUP.md](OLLAMA_SETUP.md)**
 
 ---
 
@@ -105,7 +167,7 @@ All configuration is handled via the `.env` file in the project root. See `.env.
 
 ### Prerequisites
 - [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/)
-- (Optional) OpenAI or Gemini API keys for advanced bot intelligence
+- (Optional) OpenAI, Gemini API keys, or Ollama for advanced bot intelligence
 
 ### Steps
 ```powershell
