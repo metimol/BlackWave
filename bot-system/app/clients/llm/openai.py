@@ -48,13 +48,15 @@ class OpenAIClient(BaseLLMClient):
             Generated text
         """
         try:
-            response = self.client.completions.create(
+            response = self.client.chat.completions.create(
                 model=self.model,
-                prompt=prompt,
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
                 max_tokens=max_tokens,
                 temperature=temperature,
             )
-            raw_text = response.choices[0].text.strip()
+            raw_text = response.choices[0].message.content.strip()
             return strip_think_tags(raw_text)
         except Exception as e:
             raise LLMError(f"OpenAI text generation error: {str(e)}")
