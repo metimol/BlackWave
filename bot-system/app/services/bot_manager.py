@@ -185,7 +185,10 @@ class BotManager:
 
             bot = self.bot_repository.create_bot(bot_data)
 
-            first_name, last_name = full_name.split(" ", 1)
+            # Handle names that might not have spaces safely
+            name_parts = full_name.split(" ", 1)
+            first_name = name_parts[0] if name_parts else "Unknown"
+            last_name = name_parts[1] if len(name_parts) > 1 else ""
 
             api_bot_data = {
                 "username": username,

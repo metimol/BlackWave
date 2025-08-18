@@ -30,7 +30,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() in ("true", "1", "yes")
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(",")
 DOMAIN = os.environ.get("DOMAIN", "localhost")
-CSRF_TRUSTED_ORIGINS = [f"http://{DOMAIN}", f"https://{DOMAIN}"]
+CSRF_TRUSTED_ORIGINS = [f"http://{DOMAIN}", f"https://{DOMAIN}", f"http://{DOMAIN}:8000", f"https://{DOMAIN}:8000"]
 
 
 # Application definition
