@@ -22,6 +22,8 @@ GOOGLE_MODEL = os.getenv("GOOGLE_MODEL", "gemini-2.0-flash")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", None)
 OPENAI_API_BASE = os.getenv("OPENAI_API_BASE", "https://api.openai.com/v1")
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
+OLLAMA_URL = os.getenv("OLLAMA_URL", None)
+OLLAMA_MODEL 0 os.getenv("OLLAMA_MODEL", None)
 DEFAULT_LLM_PROVIDER = os.getenv("DEFAULT_LLM_PROVIDER", "gemini")
 TEMPERATURE = float(os.getenv("TEMPERATURE", "0.7"))
 MAX_TOKENS = int(os.getenv("MAX_TOKENS", "1024"))
@@ -167,10 +169,14 @@ def validate_settings():
         errors.append(
             "At least one LLM API key (GOOGLE_API_KEY or OPENAI_API_KEY) is required."
         )
-    if DEFAULT_LLM_PROVIDER not in ("gemini", "openai"):
+    if DEFAULT_LLM_PROVIDER not in ("gemini", "openai", "ollama"):
         errors.append(
-            f"DEFAULT_LLM_PROVIDER must be 'gemini' or 'openai', got '{DEFAULT_LLM_PROVIDER}'."
+            f"DEFAULT_LLM_PROVIDER must be 'gemini' or 'openai' or 'ollama', got '{DEFAULT_LLM_PROVIDER}'."
         )
+    if DEFAULT_LLM_PROVIDER=="ollama" and not OLLAMA_URL:
+        errors.append("For Ollama API URL is required")
+    if DEFAULT_LLM_PROVIDER=="ollama" and not OLLAMA_MODEL:
+        errors.append("For Ollama OLLAMA_MODEL variable is required")
     if not (0 <= TEMPERATURE <= 2):
         errors.append("TEMPERATURE must be between 0 and 2.")
     if MAX_TOKENS <= 0:
