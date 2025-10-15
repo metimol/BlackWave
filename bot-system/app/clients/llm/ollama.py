@@ -17,7 +17,7 @@ logger = setup_logging()
 class OllamaClient(BaseLLMClient):
     """Client for interacting with Ollama API."""
 
-    def __init__(self, api_base: str=OLLAMA_URL, api_key: model: str = OLLAMA_MODEL):
+    def __init__(self, api_base: str=OLLAMA_URL, model: str=OLLAMA_MODEL):
         """
         Initialize the Ollama client.
 
@@ -63,13 +63,12 @@ class OllamaClient(BaseLLMClient):
             # Generate content
             async with httpx.AsyncClient(timeout=None, verify=False) as client:
                 response = await client.post(f"{self.api_base}/api/chat", json=body)
+                response.raise_for_status()
 
-            await response.raise_for_status()
-
-            # Extract and return text
-            answer = await response.json()
-            answer = answer.get("message", {})
-            answer = answer.get("content", None)
+                # Extract and return text
+                answer = response.json()
+                answer = answer.get("message", {})
+                answer = answer.get("content", None)
             if answer:
                 return strip_think_tags(answer.strip())
             else:

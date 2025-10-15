@@ -23,7 +23,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", None)
 OPENAI_API_BASE = os.getenv("OPENAI_API_BASE", "https://api.openai.com/v1")
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
 OLLAMA_URL = os.getenv("OLLAMA_URL", None)
-OLLAMA_MODEL 0 os.getenv("OLLAMA_MODEL", None)
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", None)
 DEFAULT_LLM_PROVIDER = os.getenv("DEFAULT_LLM_PROVIDER", "gemini")
 TEMPERATURE = float(os.getenv("TEMPERATURE", "0.7"))
 MAX_TOKENS = int(os.getenv("MAX_TOKENS", "1024"))
@@ -163,15 +163,15 @@ def validate_settings():
     if not SOCIAL_NETWORK_URL:
         errors.append("SOCIAL_NETWORK_URL is required.")
     if not API_KEY:
-        errors.append("API_KEY is required.")
+        errors.append("API_KEY for django is required.")
     # LLM Configuration
-    if not (GOOGLE_API_KEY or OPENAI_API_KEY):
-        errors.append(
-            "At least one LLM API key (GOOGLE_API_KEY or OPENAI_API_KEY) is required."
-        )
     if DEFAULT_LLM_PROVIDER not in ("gemini", "openai", "ollama"):
         errors.append(
             f"DEFAULT_LLM_PROVIDER must be 'gemini' or 'openai' or 'ollama', got '{DEFAULT_LLM_PROVIDER}'."
+        )
+    if DEFAULT_LLM_PROVIDER!="ollama" and not (GOOGLE_API_KEY or OPENAI_API_KEY):
+        errors.append(
+            "At least one LLM API key (GOOGLE_API_KEY or OPENAI_API_KEY) is required."
         )
     if DEFAULT_LLM_PROVIDER=="ollama" and not OLLAMA_URL:
         errors.append("For Ollama API URL is required")
