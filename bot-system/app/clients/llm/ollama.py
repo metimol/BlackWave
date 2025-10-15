@@ -49,14 +49,16 @@ class OllamaClient(BaseLLMClient):
             # Create a generative model
             body = {
                 "model": self.model,
-                "temperature": temperature,
-                "max_output_tokens": max_tokens,
-                "top_p": 0.95,
-                "top_k": 40,
                 "messages": [
                     {"role": "user", "content": prompt}
                 ],
-                "stream": False
+                "stream": False,
+                "options": {
+                    "temperature": temperature,
+                    "num_predict": max_tokens,
+                    "top_p": 0.95,
+                    "top_k": 40
+                }
             }
 
 
